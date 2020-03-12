@@ -3,5 +3,6 @@ body,
 .app {
 	height: 100vh;
 	background: #111;
+	color: white;
 	padding: 1em;
 }
