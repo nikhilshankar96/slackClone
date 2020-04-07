@@ -55,7 +55,7 @@ export default class MessageForm extends Component {
 	};
 
 	render() {
-		const { errors } = this.state;
+		const { errors, message, loading } = this.state;
 		return (
 			<Segment className='message__form'>
 				<Input
@@ -71,6 +71,7 @@ export default class MessageForm extends Component {
 							? "error"
 							: ""
 					}
+					value={message}
 				/>
 				<Button.Group icon widths='2'>
 					<Button
@@ -79,6 +80,7 @@ export default class MessageForm extends Component {
 						labelPosition='left'
 						icon='edit'
 						onClick={this.sendMessage}
+						disabled={loading}
 					/>
 					<Button
 						color='teal'
