@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import firebase from "../../firebase";
 import { connect } from "react-redux";
-import { setCurrentChannel } from "../../actions";
+import { setCurrentChannel, setPrivateChannel } from "../../actions";
 import {
 	Menu,
 	Icon,
@@ -75,6 +75,7 @@ class Channels extends React.Component {
 	changeChannel = (channel) => {
 		this.setActiveChannel(channel);
 		this.props.setCurrentChannel(channel);
+		this.props.setPrivateChannel(false);
 	};
 
 	setActiveChannel = (channel) => {
@@ -129,7 +130,7 @@ class Channels extends React.Component {
 		const { channels, modal } = this.state;
 		return (
 			<Fragment>
-				<Menu.Menu style={{ padding: "1.2em" }}>
+				<Menu.Menu className='menu'>
 					<Menu.Item>
 						<span>
 							<Icon name='exchange' /> Channels (
@@ -184,4 +185,6 @@ class Channels extends React.Component {
 	}
 }
 
-export default connect(null, { setCurrentChannel })(Channels);
+export default connect(null, { setCurrentChannel, setPrivateChannel })(
+	Channels
+);

@@ -3,8 +3,6 @@ import moment from "moment";
 import { Comment, Image } from "semantic-ui-react";
 
 const isOwnMessage = (message, user) => {
-	console.log(message, user);
-
 	return message.user.id === user.uid ? "message__self" : "";
 };
 
