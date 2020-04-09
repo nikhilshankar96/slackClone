@@ -72,7 +72,7 @@ class Channels extends React.Component {
 			notifications[index].lastKnownTotal = snap.numChildren();
 		} else {
 			notifications.push({
-				if: channelId,
+				id: channelId,
 				total: snap.numChildren(),
 				lastKnownTotal: snap.numChildren(),
 				count: 0,
