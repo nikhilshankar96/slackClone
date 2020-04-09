@@ -8,7 +8,19 @@ body,
 }
 
 .messages {
-	height: 440px;
+	/* height: auto; */
+	/* height: 700px */
+	/* width: auto; */
+	height: 71vh;
+	width: 100% !important;
+	overflow-y: scroll;
+}
+.messages__progress {
+	/* height: auto; */
+	/* height: 700px */
+	/* width: auto; */
+	height: 67vh;
+	width: 100% !important;
 	overflow-y: scroll;
 }
 
@@ -22,6 +34,13 @@ body,
 }
 
 .message__self {
-	border-left: 2px solid gray;
+	border-left: 2px solid lightgreen;
 	padding-left: 8px;
+}
+.message__image {
+	padding: 1em;
+}
+
+.progress__bar {
+	margin: 0.3em 0 0 0 !important;
 }

@@ -9,7 +9,7 @@ import {
 	Form,
 	Input,
 	Button,
-	Label,
+	// Label,
 } from "semantic-ui-react";
 
 class Channels extends React.Component {
@@ -92,10 +92,10 @@ class Channels extends React.Component {
 				style={{
 					opacity: 0.7,
 				}}
-				active={channel.id == this.state.activeChannel}
+				active={channel.id === this.state.activeChannel}
 			>
 				# {channel.name}
-				{channel.id == this.state.activeChannel ? (
+				{channel.id === this.state.activeChannel ? (
 					<Icon name='eye' size='large' />
 				) : (
 					""

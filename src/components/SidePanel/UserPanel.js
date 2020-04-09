@@ -5,7 +5,7 @@ import { Grid, Header, Icon, Dropdown, Image } from "semantic-ui-react";
 
 class UserPanel extends React.Component {
 	state = {
-		user: this.props.currentUser
+		user: this.props.currentUser,
 	};
 
 	dropdownOptions = () => [
@@ -20,12 +20,12 @@ class UserPanel extends React.Component {
 		// },
 		{
 			key: "avatar",
-			text: <span>Change Avatar</span>
+			text: <span>Change Avatar</span>,
 		},
 		{
 			key: "signout",
-			text: <span onClick={this.handleSignOut}>Sign Out</span>
-		}
+			text: <span onClick={this.handleSignOut}>Sign Out</span>,
+		},
 	];
 
 	handleSignOut = () => {
