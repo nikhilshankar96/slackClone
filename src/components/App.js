@@ -31,6 +31,7 @@ const App = ({
 			key={currentUser && currentUser.uid}
 			currentUser={currentUser}
 			primaryColor={primaryColor}
+			secondaryColor={secondaryColor}
 		/>
 		<Grid.Column style={{ marginLeft: 320 }}>
 			<Messages

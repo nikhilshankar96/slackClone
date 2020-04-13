@@ -2,7 +2,7 @@ html,
 body,
 .app {
 	height: 100vh;
-	background: #111;
+	background: black;
 	color: white;
 	padding: 1em;
 }

@@ -45,7 +45,7 @@ class UserPanel extends React.Component {
 					<Grid.Row style={{ padding: "1.2 em", margin: 0 }}>
 						{/* App header */}
 						<Header inverted floated='left' as='h2'>
-							<Icon name='bell' color='blue' />
+							<Icon name='bell' />
 							<Header.Content>VeryChat</Header.Content>
 						</Header>
 						{/* User Dropdown */}

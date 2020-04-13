@@ -77,6 +77,7 @@ class ColorPanel extends React.Component {
 				<div
 					className='color__container'
 					onClick={() => this.props.setColors(color.primary, color.secondary)}
+					style={{ border: "white 1px solid" }}
 				>
 					<div className='color__square' style={{ background: color.primary }}>
 						<div
@@ -95,10 +96,11 @@ class ColorPanel extends React.Component {
 			<Sidebar
 				as={Menu}
 				icon='labeled'
-				inverted
+				// inverted
 				vertical
 				visible
 				width='very thin'
+				style={{ background: "black" }}
 			>
 				<Divider />
 				<Button
@@ -112,7 +114,7 @@ class ColorPanel extends React.Component {
 				<Modal basic open={modal} onClose={this.closeModal}>
 					<Modal.Header>Choose App Colors</Modal.Header>
 					<Modal.Content>
-						<Segment inverted>
+						{/* <Segment inverted>
 							<Label content='Primary Color' />
 							<SliderPicker
 								color={primary}
@@ -126,7 +128,7 @@ class ColorPanel extends React.Component {
 								color={secondary}
 								onChange={this.handleChangeSecondary}
 							/>
-						</Segment>
+						</Segment> */}
 						<Segment inverted>
 							<div style={{ width: "50%", display: "inline-block" }}>
 								<Label content='Primary Color' />
