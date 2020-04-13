@@ -14,7 +14,6 @@ class Starred extends Component {
 	};
 
 	componentDidMount() {
-		console.log(this.state.starredChannels);
 		if (this.state.user) {
 			this.addListeners(this.state.user.uid);
 		}
