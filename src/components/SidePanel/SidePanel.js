@@ -7,7 +7,7 @@ import DirectMessages from "./DirectMessages";
 
 class SidePanel extends React.Component {
 	render() {
-		const { currentUser } = this.props;
+		const { currentUser, primaryColor } = this.props;
 		return (
 			<Menu
 				size='large'
@@ -15,11 +15,11 @@ class SidePanel extends React.Component {
 				fixed='left'
 				vertical
 				style={{
-					background: "#222",
+					background: primaryColor,
 					fontSize: "1.2rem",
 				}}
 			>
-				<UserPanel currentUser={currentUser} />
+				<UserPanel primaryColor={primaryColor} currentUser={currentUser} />
 				<Starred currentUser={currentUser} />
 				<Channels currentUser={currentUser} />
 				<DirectMessages currentUser={currentUser} />

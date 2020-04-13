@@ -58,11 +58,30 @@ const channel_reducer = (state = initialChannelState, action) => {
 	}
 };
 
+const initialColorsState = {
+	primaryColor: "#03a9f4",
+	secondaryColor: "#000000",
+};
+
+const colors_reducer = (state = initialColorsState, action) => {
+	switch (action.type) {
+		case actionTypes.SET_COLORS:
+			return {
+				primaryColor: action.payload.primaryColor,
+				secondaryColor: action.payload.secondaryColor,
+			};
+
+		default:
+			return state;
+	}
+};
+
 //root
 
 const rootReducer = combineReducers({
 	user: user_reducer,
 	channel: channel_reducer,
+	colors: colors_reducer,
 });
 
 export default rootReducer;
