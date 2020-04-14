@@ -9,6 +9,7 @@ import MessageForm from "./MessageForm";
 import Message from "./Message";
 import Typing from "./Typing";
 import ProgressBar from "./ProgressBar";
+import Skeleton from "./Skeleton";
 
 class Messages extends React.Component {
 	state = {
@@ -37,7 +38,19 @@ class Messages extends React.Component {
 			this.addListeners(channel.id);
 			this.addUserStarsListener(channel.id, user.uid);
 		}
+
+		setTimeout(() => {
+			if (this.messagesEnd) this.scrollToBottom();
+		}, 500);
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.messagesEnd) this.scrollToBottom();
+	}
+
+	scrollToBottom = () => {
+		this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+	};
 
 	addListeners = (channelId) => {
 		this.addMessageListener(channelId);
@@ -232,6 +245,15 @@ class Messages extends React.Component {
 			</div>
 		));
 
+	displayMessagesSkeleton = (loading) =>
+		loading ? (
+			<React.Fragment>
+				{[...Array(10)].map((_, i) => (
+					<Skeleton key={i} />
+				))}
+			</React.Fragment>
+		) : null;
+
 	render() {
 		const {
 			messagesRef,
@@ -249,8 +271,6 @@ class Messages extends React.Component {
 			typingUsers,
 		} = this.state;
 
-		// const messageD = this.displayMessages(messages);
-
 		return (
 			<React.Fragment>
 				<MessagesHeader
@@ -267,11 +287,13 @@ class Messages extends React.Component {
 					<Comment.Group
 						className={progressBar ? "messages" : "messages__progress"}
 					>
+						{this.displayMessagesSkeleton(messagesLoading)}
 						{searchTerm
 							? this.displayMessages(searchResults)
 							: this.displayMessages(messages)}
 
 						{this.displayTypingUsers(typingUsers)}
+						<div className='' ref={(node) => (this.messagesEnd = node)}></div>
 					</Comment.Group>
 				</Segment>
 				<MessageForm
