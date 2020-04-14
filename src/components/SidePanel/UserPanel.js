@@ -143,8 +143,6 @@ class UserPanel extends React.Component {
 										{/*   Some space here */}
 										<Image src={user.photoURL} spaced='right' avatar />
 										{this.state.user.displayName}
-										<br />
-										<br />
 									</span>
 								}
 								options={this.dropdownOptions()}

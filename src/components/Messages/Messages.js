@@ -7,6 +7,7 @@ import { setUserPosts } from "../../actions";
 import MessagesHeader from "./MessagesHeader";
 import MessageForm from "./MessageForm";
 import Message from "./Message";
+import Typing from "./Typing";
 import ProgressBar from "./ProgressBar";
 
 class Messages extends React.Component {
@@ -25,6 +26,9 @@ class Messages extends React.Component {
 		searchResults: [],
 		isChannelStarred: false,
 		usersRef: firebase.database().ref("users"),
+		typingRef: firebase.database().ref("typing"),
+		typingUsers: [],
+		connectedRef: firebase.database().ref(".info/connected"),
 	};
 
 	componentDidMount() {
@@ -37,6 +41,38 @@ class Messages extends React.Component {
 
 	addListeners = (channelId) => {
 		this.addMessageListener(channelId);
+		this.addTypingListeners(channelId);
+	};
+
+	addTypingListeners = (channelId) => {
+		let typingUsers = [];
+		this.state.typingRef.child(channelId).on("child_added", (snap) => {
+			if (snap.key !== this.state.user.uid) {
+				typingUsers = typingUsers.concat({
+					id: snap.key,
+					name: snap.val(),
+				});
+				this.setState({ typingUsers });
+			}
+		});
+
+		this.state.typingRef.child(channelId).on("child_removed", (snap) => {
+			const index = typingUsers.findIndex((user) => user.id === snap.key);
+			if (index !== -1) {
+				typingUsers = typingUsers.filter((user) => user.id !== snap.key);
+				this.setState({ typingUsers });
+			}
+		});
+
+		this.state.connectedRef.on("value", (snap) => {
+			if (snap.val() === true) {
+				this.state.typingRef
+					.child(channelId)
+					.child(this.state.user.uid)
+					.onDisconnect()
+					.remove((err) => err && err !== null && console.error(err));
+			}
+		});
 	};
 
 	addMessageListener = (channelId) => {
@@ -179,6 +215,23 @@ class Messages extends React.Component {
 		}
 	};
 
+	displayTypingUsers = (users) =>
+		users.length > 0 &&
+		users.map((user) => (
+			<div
+				className=''
+				style={{
+					display: "flex",
+					alignItems: "center",
+					color: "black",
+					marginBottom: "0.2em",
+				}}
+				key={user.id}
+			>
+				<span className='user__typing'>{user.name} is typing</span> <Typing />
+			</div>
+		));
+
 	render() {
 		const {
 			messagesRef,
@@ -193,6 +246,7 @@ class Messages extends React.Component {
 			searchLoading,
 			privateChannel,
 			isChannelStarred,
+			typingUsers,
 		} = this.state;
 
 		// const messageD = this.displayMessages(messages);
@@ -216,6 +270,8 @@ class Messages extends React.Component {
 						{searchTerm
 							? this.displayMessages(searchResults)
 							: this.displayMessages(messages)}
+
+						{this.displayTypingUsers(typingUsers)}
 					</Comment.Group>
 				</Segment>
 				<MessageForm

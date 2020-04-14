@@ -18,6 +18,7 @@ export default class MessageForm extends Component {
 		user: this.props.currentUser,
 		errors: [],
 		modal: false,
+		typingRef: firebase.database().ref("typing"),
 	};
 
 	openModal = () => this.setState({ modal: true });
@@ -47,7 +48,7 @@ export default class MessageForm extends Component {
 
 	sendMessage = () => {
 		const { getMessagesRef } = this.props;
-		const { message, channel } = this.state;
+		const { message, channel, user, typingRef } = this.state;
 		if (message) {
 			this.setState({ loading: true });
 			getMessagesRef()
@@ -55,7 +56,12 @@ export default class MessageForm extends Component {
 				.push()
 				.set(this.createMessage())
 				.then(() => {
-					this.setState({ loading: false, message: "", errors: [] });
+					this.setState({
+						loading: false,
+						message: "",
+						errors: [],
+					});
+					typingRef.child(channel.id).child(user.uid).remove();
 				})
 				.catch((error) => {
 					console.error(error);
@@ -67,7 +73,9 @@ export default class MessageForm extends Component {
 			//
 		} else {
 			this.setState({
-				errors: this.state.errors.concat({ message: "Add a message" }),
+				errors: this.state.errors.concat({
+					message: "Add a message",
+				}),
 			});
 		}
 	};
@@ -130,8 +138,6 @@ export default class MessageForm extends Component {
 	};
 
 	sendFileMessage = (fileUrl, ref, pathToUpload) => {
-		console.log("sendfilemessage called");
-
 		ref
 			.child(pathToUpload)
 			.push()
@@ -149,6 +155,16 @@ export default class MessageForm extends Component {
 				});
 				//
 			});
+	};
+
+	handleKeyDown = () => {
+		const { message, user, typingRef, channel } = this.state;
+
+		if (message && message !== "") {
+			typingRef.child(channel.id).child(user.uid).set(user.displayName);
+		} else {
+			typingRef.child(channel.id).child(user.uid).remove();
+		}
 	};
 
 	render() {
@@ -170,6 +186,7 @@ export default class MessageForm extends Component {
 					labelPosition='left'
 					placeholder='Write your message'
 					onChange={this.handleChange}
+					onKeyDown={this.handleKeyDown}
 					className={
 						errors.some((error) => error.message.includes("message"))
 							? "error"
