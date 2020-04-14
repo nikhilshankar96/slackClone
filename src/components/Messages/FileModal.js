@@ -44,7 +44,7 @@ export default class FileModal extends Component {
 				<Modal.Content>
 					<Input
 						fluid
-						label='File types: jpg, png, gif'
+						label='File types: jpg, png, gif; Up to 1MB only'
 						name='file'
 						type='file'
 						onChange={this.addFile}

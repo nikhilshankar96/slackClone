@@ -92,7 +92,7 @@ export default class MessageForm extends Component {
 
 	getPath = () => {
 		if (this.props.isPrivateChannel) {
-			return `chat/private=${this.state.channel.id}`;
+			return `chat/private/${this.state.channel.id}`;
 		} else {
 			return `chat/public`;
 		}
@@ -168,9 +168,9 @@ export default class MessageForm extends Component {
 	};
 
 	handleKeyDown = (event) => {
-		if (event.ctrlKey && event.keyCode === 13) {
-			this.sendMessage();
-		}
+		// if (event.ctrlKey && event.keyCode === 13) {
+		// 	this.sendMessage();
+		// }
 		if (event.keyCode === 13) {
 			this.sendMessage();
 		}
