@@ -315,6 +315,7 @@ class Messages extends React.Component {
 
 				<Segment>
 					<Comment.Group
+						style={{ width: "100%", maxWidth: "100%" }}
 						className={progressBar ? "messages" : "messages__progress"}
 					>
 						{this.displayMessagesSkeleton(messagesLoading)}
