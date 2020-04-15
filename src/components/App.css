@@ -4,7 +4,7 @@ body,
 	height: 100vh;
 	background: black;
 	color: white;
-	padding: 1em;
+	/* padding: 1em; */
 }
 
 .menu {
@@ -15,7 +15,7 @@ body,
 	/* height: auto; */
 	/* height: 700px */
 	/* width: auto; */
-	height: 71vh;
+	height: 75vh;
 	width: 100% !important;
 	overflow-y: scroll;
 }
@@ -23,7 +23,7 @@ body,
 	/* height: auto; */
 	/* height: 700px */
 	/* width: auto; */
-	height: 67vh;
+	height: 66vh;
 	width: 100% !important;
 	overflow-y: scroll;
 }

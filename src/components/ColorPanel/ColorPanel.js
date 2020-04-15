@@ -108,7 +108,7 @@ class ColorPanel extends React.Component {
 				vertical
 				visible
 				width='very thin'
-				style={{ background: "black" }}
+				style={{ background: "black", overflowY: "scroll" }}
 			>
 				<Divider />
 				<Button

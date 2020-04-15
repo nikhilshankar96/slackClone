@@ -17,6 +17,7 @@ class SidePanel extends React.Component {
 				style={{
 					background: primaryColor,
 					fontSize: "1.2rem",
+					overflowY: "scroll",
 				}}
 			>
 				<UserPanel
