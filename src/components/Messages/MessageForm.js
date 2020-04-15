@@ -80,7 +80,11 @@ export default class MessageForm extends Component {
 						errors: this.state.errors.concat(error),
 					});
 				});
-			//
+			this.setState({
+				loading: false,
+				message: "",
+				errors: [],
+			});
 		} else {
 			this.setState({
 				errors: this.state.errors.concat({
